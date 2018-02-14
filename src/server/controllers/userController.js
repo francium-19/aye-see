@@ -8,42 +8,70 @@ const userController = {};
 
 // Creates a new user in the database with bcrypt
 userController.createUser = (req, res, next) => {
-  console.log(req.body)
-  const hashedPassword = bcrypt.hashSync(req.body.password, SALT_WORK_FACTOR);
+  const email = req.body.email;
+  const username = req.body.username;
+  const password = req.body.password;
+  const hashedPassword = bcrypt.hashSync(password, SALT_WORK_FACTOR);
   sql.query(
     sqlstring.format(
       'INSERT INTO user (email, username, password) VALUES (?,?,?)',
-      [req.body.email, req.body.username, hashedPassword]
+      [email, username, hashedPassword]
     ),
-    (err, results, fields) => {
-      if (err) return res.status(400).send(err);
+    (error, results, fields) => {
+      if (error) {
+        err = new Error('Invalid credentials');
+        err.functionName = 'userController.createUser';
+        err.status = 400;
+        next(err);
+      }
       else {
+        res.locals.auth = true;
         res.locals.userId = results.insertId; // Sends back primary key of created user
-        return next();
+        next();
       }
     }
   );
-};
+}
 
 // Verifies the user credentials
 // Possible extension: For increased security, delay response if error or invalid credentials
 userController.verifyUser = (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  console.log('userController.verifyUser: ' + username + ' ' + password);
   sql.query(
     sqlstring.format(
       'SELECT id, username, password FROM user WHERE username = ?',
-      [req.body.username]
+      [username]
     ),
-    (err, results, fields) => {
-      if (err) return res.status(500).send(err);
+    (error, results, fields) => {
+      if (error) {
+        err = new Error('Database error');
+        err.functionName = 'userController.verifyUser';
+        err.status = 400;
+        next(err);
+      }
       if (results.length) {
-        if (bcrypt.compareSync(req.body.password, results[0].password)) {
+        if (bcrypt.compareSync(password, results[0].password)) {
+          res.locals.auth = true;
           res.locals.userId = results[0].id;
-          return next();
+          next();
+        }
+        else {
+          err = new Error('Invalid credentials');
+          err.functionName = 'userController.verifyUser';
+          err.status = 400;
+          next(err);
         }
       }
-      return res.status(400).send('Invalid credentials');
+      else {
+        err = new Error('Invalid credentials');
+        err.functionName = 'userController.verifyUser';
+        err.status = 400;
+        next(err);
+      }
     }
   );
-};
+}
 
 module.exports = userController;

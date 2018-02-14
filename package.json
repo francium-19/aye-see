@@ -1,27 +1,28 @@
 {
-  "name": "aye-see",
+  "name": "wee-see",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/server/index.js",
+    "start": "nodemon src/server/server.js",
     "webpack": "./node_modules/.bin/webpack -w",
     "test": "mocha --compilers babel-core/register ./test/*test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JamesThomasEdwards/aye-see.git"
+    "url": "git+https://github.com/francium-19/we-see.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JamesThomasEdwards/aye-see/issues"
+    "url": "https://github.com/francium-19/we-see/issues"
   },
-  "homepage": "https://github.com/JamesThomasEdwards/aye-see#readme",
+  "homepage": "https://github.com/francium-19/we-see#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "material-ui": "^0.20.0",
     "multer": "^1.3.0",
