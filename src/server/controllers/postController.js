@@ -3,14 +3,14 @@ let sanatize = require('sqlstring');
 module.exports = {
   create: function(req, res, next) {
     const { user_id, title, link} = req.body;
-    const img = req.file.filename
+    const img = req.file.filename;
     sql.query(
       sanatize.format(
         'INSERT INTO post (user_id,title,link,img) VALUES (?,?,?,?)',
         [user_id, title, link, img]
       ),
       function(err, results, fields) {
-        if (err) res.send(err);
+        if (err) return res.send(err);
         next();
       }
     );

@@ -8,6 +8,7 @@ const userController = {};
 
 // Creates a new user in the database with bcrypt
 userController.createUser = (req, res, next) => {
+  console.log(req.body)
   const hashedPassword = bcrypt.hashSync(req.body.password, SALT_WORK_FACTOR);
   sql.query(
     sqlstring.format(

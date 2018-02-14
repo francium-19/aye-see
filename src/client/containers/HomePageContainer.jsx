@@ -5,7 +5,7 @@ import PostCreator from '../components/PostCreator.jsx';
 
 class HomePageContainer extends Component {
     constructor(props) {
-      super(props);
+        super(props);
         this.state = {};
         this.state.postList = [];
 
