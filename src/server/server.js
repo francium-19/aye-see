@@ -68,7 +68,7 @@ app.post("/login",
 // Create New Post (with image)
 // newPost
 app.post("/post/create",
-  sessionController.isLoggedIn,
+  // sessionController.isLoggedIn,
   multerUpload.single("photo"),
   postController.create,
   postController.read,
@@ -81,7 +81,7 @@ app.post("/post/create",
 // Get specific posts
 app.get(
   "/post/:id",
-  sessionController.isLoggedIn,
+  // sessionController.isLoggedIn,
   postController.paramsToLocal,
   postController.read,
   (req, res) => {
@@ -91,7 +91,7 @@ app.get(
 
 // old route name - getAllPosts
 app.get("/posts", 
-  sessionController.isLoggedIn,
+  // sessionController.isLoggedIn,
   postController.getAllPosts, 
   (req, res) => {
   res.status(200).json(res.locals.posts);
@@ -99,7 +99,7 @@ app.get("/posts",
 
 // old route name - newComment
 app.post("/post/comment/create",
-  sessionController.isLoggedIn,
+  // sessionController.isLoggedIn,
   multerUpload.single("photo"),
   commentController.create,
   commentController.read,
@@ -110,7 +110,7 @@ app.post("/post/comment/create",
 );
 
 app.get("/comment/:id",
-  sessionController.isLoggedIn,
+  // sessionController.isLoggedIn,
   commentController.paramsToLocal,
   commentController.read,
   (req, res) => {
@@ -119,7 +119,7 @@ app.get("/comment/:id",
 );
 
 app.get("/post/:id/comments",
-  sessionController.isLoggedIn, 
+  // sessionController.isLoggedIn,
   commentController.getPostComments, (req, res) => {
     res.status(200).json(res.locals.comments);
   });

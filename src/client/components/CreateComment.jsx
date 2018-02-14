@@ -34,8 +34,9 @@ export default class CreateComment extends Component{
     for(let i in post_body){
       formData.append(i,post_body[i])
     }
-    
-    fetch('/newComment',{
+
+    console.log(formData)
+    fetch('/post/comment/create',{
       method: 'POST',
       body: formData
     })

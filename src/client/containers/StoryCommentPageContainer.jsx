@@ -15,12 +15,13 @@ export default class StoryCommentPageContainer extends Component{
   }
 
   componentDidMount(){
-    fetch(`/${this.state.post_id}`)
+    fetch(`/post/${this.state.post_id}/comments`)
       .then(res => res.json())
       .then(data => {
         this.setState({ comments: data })
       });
 
+    console.log(this.state.post_id)
     fetch(`/post/${this.state.post_id}`)
       .then(res => res.json())
       .then(data => {

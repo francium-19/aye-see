@@ -14,7 +14,7 @@ commentController.create = (req, res, next) => {
     // add post_id, user_id, img (name as stored on server), caption. created_at will default to current time.
     const postId = req.body.post_id;
     const userId = req.body.user_id;
-    const img = req.file.originalname;
+    const img = req.file.filename;
     const caption = req.body.caption;
     sql.query(
       sqlstring.format(

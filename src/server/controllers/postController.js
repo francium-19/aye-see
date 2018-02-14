@@ -34,6 +34,7 @@ postController.create = (req, res, next) => {
 
 postController.read = (req, res, next) => {
   const postId = res.locals.id;
+  console.log(`postController.read  ${res.locals.id}`)
   sql.query(
     sqlstring.format("SELECT * FROM post WHERE post_id=?", [postId]),
     function(error, results, fields) {

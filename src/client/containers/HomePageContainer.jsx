@@ -20,7 +20,7 @@ class HomePageContainer extends Component {
     }
 
     submitPost(data){
-      fetch('/newPost', {
+      fetch('/post/create', {
         method: 'POST',
         body: data
       })

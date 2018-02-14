@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GridList, GridTile } from 'material-ui/GridList';
+import { GridList , GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
@@ -28,7 +28,7 @@ class ImageGrid extends Component {
     componentDidMount(){
         if (this.props.postList.length === 0) {
             console.log('Comp did mount, imagegrid');
-            fetch('/getAllPosts')
+            fetch('/posts')
             .then(res => res.json())
             .then((res) => this.props.renderPosts(res));
             // .catch((res) => )
